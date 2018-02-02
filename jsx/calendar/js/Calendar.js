@@ -1,9 +1,14 @@
 const Calendar = function (props) {
   const originalDate = props.date;
-  console.log(originalDate);
+
+  const firstToUpper = (str) => str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
+
+  const weekday = firstToUpper(originalDate.toLocaleString('ru', {weekday: 'long'}));
+  const month = firstToUpper(originalDate.toLocaleString('ru', {month: 'long'}));
+
   const materialHeader = (
     <div className="ui-datepicker-material-header">
-      <div className="ui-datepicker-material-day">Среда</div>
+      <div className="ui-datepicker-material-day">{ weekday } </div>
       <div className="ui-datepicker-material-date">
         <div className="ui-datepicker-material-day-num">{ originalDate.getDate() }</div>
         <div className="ui-datepicker-material-month">{ originalDate.toLocaleString('ru', {month: 'long', day: 'numeric'}).replace(originalDate.getDate(), '') }</div>
@@ -15,7 +20,7 @@ const Calendar = function (props) {
   const datePickerHeader = (
     <div className="ui-datepicker-header">
       <div className="ui-datepicker-title">
-        <span className="ui-datepicker-month">{ originalDate.toLocaleString('ru', {month: 'long'}) }</span>&nbsp;<span className="ui-datepicker-year">{ originalDate.getFullYear() }</span>
+        <span className="ui-datepicker-month">{ month }</span>&nbsp;<span className="ui-datepicker-year">{ originalDate.getFullYear() }</span>
       </div>
     </div>
   );
@@ -46,7 +51,7 @@ const Calendar = function (props) {
     let list = [];
 
     for (let i = 0; i < 7; i++) {
-      if (date.getDate() === currentDate.getDate()) {
+      if (date.getDate() === currentDate.getDate() && date.getMonth() === currentDate.getMonth()) {
         list.push(<td className="ui-datepicker-today">{ date.getDate() }</td>);
       } else if (date.getMonth() !== currentDate.getMonth()) {
         list.push(<td className="ui-datepicker-other-month">{ date.getDate() }</td>);
@@ -67,7 +72,7 @@ const Calendar = function (props) {
   const CustomBody = function(props) {
     const firstDay = new Date(props.originalDate.getTime());
     firstDay.setDate(1);
-    firstDay.setDate(firstDay.getDate() - firstDay.getDay() + 1);
+    firstDay.setDate(firstDay.getDate() - (firstDay.getDay() ? firstDay.getDay() + 1 : 6));
     console.log(firstDay);
     const list = [];
 
