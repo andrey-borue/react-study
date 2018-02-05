@@ -19,7 +19,7 @@ function MessageHistory({list}) {
         return null;
     }
 
-    return <MessageComponent from={item.from} message={item} id={item.id} />
+    return <MessageComponent from={item.from} message={item} key={item.id} />
   });
 
   return (

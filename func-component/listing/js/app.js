@@ -44,7 +44,7 @@ function Listing({items}) {
     }
 
 
-    return <Item url={item.url} img_url={item.MainImage.url_570xN} title={title} price={price} quantity={item.quantity} level={level} />
+    return <Item url={item.url} img_url={item.MainImage.url_570xN} title={title} price={price} quantity={item.quantity} level={level} key={item.listing_id} />
   });
 
   return (
