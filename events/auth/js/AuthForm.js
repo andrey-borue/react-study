@@ -1,46 +1,44 @@
 'use strict';
 
 const AuthForm = ({onAuth}) => {
-  let nameInput, passwordInput, emailInput;
+  let form;
 
   const onSubmit = event => {
     event.preventDefault();
     const data ={
-      name: nameInput.value,
-      password: passwordInput.value,
-      email: emailInput.value
+      name: form.elements['name'].value,
+      password: form.elements['password'].value,
+      email: form.elements['email'].value
     };
-
 
     typeof onAuth === 'function' ? onAuth(data) : console.error('onAuth не является функцией');
   };
 
-  const name = (
+  const checkPassword = event => {
+    event.currentTarget.value = event.currentTarget.value.replace(/[^a-zA-Z0-9_]/, '');
+  };
+
+  const checkEmail = event => {
+    event.currentTarget.value = event.currentTarget.value.replace(/[^a-zA-Z0-9_@\.\-]/, '');
+  };
+
+  return (
+    <form className="ModalForm" action="/404/auth/" method="POST" onSubmit={onSubmit} ref={el => form = el} >
       <div className="Input">
-        <input required type="text" placeholder="Имя" ref={el => nameInput = el} />
+        <input required type="text" placeholder="Имя" name="name" />
         <label/>
       </div>
-  );
 
-  const password =  (
       <div className="Input">
-        <input required type="password" placeholder="Пароль" ref={el => passwordInput = el} onChange={event => {event.currentTarget.value = event.currentTarget.value.replace(/[^a-zA-Z0-9_]/, '')}} />
+        <input type="email" placeholder="Электронная почта" name="email" onChange={checkEmail} />
         <label />
       </div>
-  );
 
-  const email = (
-    <div className="Input">
-      <input type="email" placeholder="Электронная почта" ref={el => emailInput = el} onChange={event => {event.currentTarget.value = event.currentTarget.value.replace(/[^a-zA-Z0-9_@\.\-]/, '')}} />
+      <div className="Input">
+        <input required type="password" placeholder="Пароль"  name="password" onChange={checkPassword} />
         <label />
-    </div>
-  );
-  
-  return (
-    <form className="ModalForm" action="/404/auth/" method="POST" onSubmit={onSubmit}>
-      {name}
-      {email}
-      {password}
+      </div>
+
       <button type="submit">
         <span>Войти</span>
         <i className="fa fa-fw fa-chevron-right" />
