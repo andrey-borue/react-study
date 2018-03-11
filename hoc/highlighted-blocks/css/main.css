@@ -45,3 +45,11 @@ body {
     font-size: 80%;
     color: #cccccc;
 }
+
+.item-popular {
+    background-color: red;
+}
+
+.item-new {
+    background-color: green;
+}
