@@ -51,6 +51,7 @@ class App extends React.Component {
     }
 
     setText = (text) => {
+        text = text.replace(/[^a-z]/g, '');
         this.setState({text});
     }
 }

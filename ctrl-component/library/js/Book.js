@@ -5,6 +5,7 @@ const Book = ({book, filterBooks}) => {
         height: 193,
         backgroundImage: backgroundImage
     };
+
     return (
         <div className="book">
             <div className="book-top">
@@ -13,7 +14,7 @@ const Book = ({book, filterBooks}) => {
             <div className="book-title">{book.title}</div>
             {book.authors && 
                 <div className="book-authors">
-                    {book.authors.map(author => <button value={author} onClick={() => filterBooks(author)} className="book-author">{author}</button>)}
+                    {book.authors.map(author => <button value={author} onClick={() => (typeof filterBooks === 'function') && filterBooks(author)} className="book-author">{author}</button>)}
                 </div>
             }
         </div>

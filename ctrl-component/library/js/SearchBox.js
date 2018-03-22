@@ -1,6 +1,8 @@
 const SearchBox = ({value, filterBooks}) => {
   const onChange = (event) => {
-    filterBooks(event.currentTarget.value);
+    if (typeof filterBooks === 'function') {
+      filterBooks(event.currentTarget.value);
+    }
   };
 
   return (
