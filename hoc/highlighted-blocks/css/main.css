@@ -47,6 +47,14 @@ body {
     color: #cccccc;
 }
 
+.item-popular {
+    background-color: red;
+}
+
+.item-new {
+    background-color: green;
+}
+
 .wrap-item {
     position: relative;
     height: 260px;
@@ -90,3 +98,4 @@ body {
     background-color: rgba(176, 0, 24, 0.73);
     border-color: rgba(176, 0, 24, 0, 1);
 }
+
