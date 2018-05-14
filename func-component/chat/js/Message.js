@@ -1,6 +1,6 @@
 'use strict';
 
-function Message({ from, message }) {
+function Message({ from, message, id }) {
   return (
     <li>
       <div className="message-data">
