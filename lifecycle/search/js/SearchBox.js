@@ -3,10 +3,15 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = { fixed: false };
+
   }
 
+  saveSearchBoxTopPosition = (el) => {
+    this.topPosition = el.offsetTop;
+  };
+
   render() {
-    return <SearchBoxView fixed={this.state.fixed} />
+    return <SearchBoxView fixed={this.state.fixed} saveSearchBoxTopPosition={this.saveSearchBoxTopPosition} />
     // ref={el => console.log(el)} => null
   }
 
@@ -25,7 +30,6 @@ class SearchBox extends React.Component {
   };
 
   componentDidMount() {
-    this.topPosition = document.querySelector('.search-box').offsetTop;
     window.addEventListener('scroll', this.scrollHandler);
   }
 
